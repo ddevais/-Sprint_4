@@ -1,4 +1,4 @@
-package ru.praktikumServices.qaScooter.pageObject;
+package ru.praktikum_services.qa_scooter.page_object;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
@@ -7,13 +7,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.praktikum_services.qa_scooter.Constants;
+
 import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class OrderPageTest {
+    private Constants constants = new Constants();
     private WebDriver driver;
     private OrderPage objOrderPage;
     private final String button;
@@ -45,13 +47,14 @@ public class OrderPageTest {
     public void startUp(){
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru");
+        driver.get(constants.getMainPage());
         objOrderPage = new OrderPage(driver);
     }
 
     @Test
     public void placeAnValidOrder(){
-        objOrderPage.order(button, name, surname, address, metroStation, telephone, date);
+        objOrderPage.setOrderField(button, name, surname, address, metroStation, telephone, date);
+        objOrderPage.checkValidOrder();
     }
 
     @After

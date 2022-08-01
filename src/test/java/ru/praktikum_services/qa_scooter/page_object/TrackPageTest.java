@@ -1,4 +1,4 @@
-package ru.praktikumServices.qaScooter.pageObject;
+package ru.praktikum_services.qa_scooter.page_object;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.praktikum_services.qa_scooter.Constants;
+
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -17,6 +19,7 @@ public class TrackPageTest {
     public final String trackNumber;
     private WebDriver driver;
     private TrackPage objTrackPage;
+    private Constants constants = new Constants();
     public TrackPageTest(String trackNumber){
         this.trackNumber = trackNumber;
     }
@@ -31,7 +34,7 @@ public class TrackPageTest {
     public void startUp(){
     WebDriverManager.chromedriver().setup();
     driver = new ChromeDriver();
-    driver.get("https://qa-scooter.praktikum-services.ru/");
+    driver.get(constants.getMainPage());
     objTrackPage = new TrackPage(driver);
 
 }

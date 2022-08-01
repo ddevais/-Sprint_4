@@ -1,4 +1,4 @@
-package ru.praktikumServices.qaScooter.pageObject;
+package ru.praktikum_services.qa_scooter.page_object;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.praktikum_services.qa_scooter.Constants;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,10 +17,10 @@ import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class MainPageTest {
-    private WebDriver driver;
-
-    private final String expected;
     private final int numberOfItemsDescription;
+    private WebDriver driver;
+    private final String expected;
+    private Constants constants = new Constants();
     public MainPageTest(String expected, int numberOfItemsDescription){
         this.numberOfItemsDescription = numberOfItemsDescription;
         this.expected = expected;
@@ -28,7 +29,7 @@ public class MainPageTest {
     public static Collection<Object[]> getItemsDescription(){
 return Arrays.asList(new Object[][]{
         {"Сутки — 400 рублей. Оплата курьеру — наличными или картой.", 1},
-        {"П1ока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.", 2},
+        {"Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.", 2},
         {"Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.", 3},
         {"Только начиная с завтрашнего дня. Но скоро станем расторопнее.", 4},
         {"Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.", 5},
@@ -41,7 +42,7 @@ return Arrays.asList(new Object[][]{
     public void startUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(constants.getMainPage());
 
 
 
